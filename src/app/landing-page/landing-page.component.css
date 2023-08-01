@@ -1,0 +1,58 @@
+.tituloLanding{
+    color: rgb(255, 255, 255);
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+  .landing-page {
+    /* background-image: url('https://elmen.pe/wp-content/uploads/2023/02/bodega-de-abarrotes.jpg'); */
+    background-color: #087cf8;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  form {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 5px;
+    /* text-align: center; */
+  }
+  
+  h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  label {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  input {
+    width: 100%;
+    height: 30px;
+    margin-bottom: 10px;
+    padding: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+  
+  button {
+    width: 100%;
+    height: 30px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  

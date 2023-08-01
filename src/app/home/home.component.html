@@ -1,0 +1,99 @@
+<app-navbar></app-navbar>
+<!-- <div class="container">
+  <div class="searchCuentas">
+    <input type="text" [(ngModel)]="nombreClienteBusqueda" placeholder="Buscar por nombre de cliente" (input)="filtrarCuentasPorNombre()">
+
+    <button class="btn btn-primary" (click)="mostrarTodasLasCuentas()">Mostrar todo</button>
+  </div>
+  <h1>Listado de Cuentas</h1>
+  <ul class="cuentas-list">
+    <li *ngFor="let cuenta of cuentas.reverse()" class="cuenta-item">
+      <div class="cuenta-details">
+        <span class="cuenta-field">ID de Cuenta:</span>
+        <span class="cuenta-value">{{ cuenta.id }}</span>
+        <br>
+        <span class="cuenta-field">Nombre del Cliente:</span>
+        <span class="cuenta-value">{{ cuenta.nombre }}</span>
+        <br>
+        <span class="cuenta-field">Monto de la Deuda:</span>
+        <span class="cuenta-value">{{ cuenta.monto }}</span>
+        <br>
+        <span class="cuenta-field">Descripción:</span>
+        <span class="cuenta-value">{{ cuenta.descripcion }}</span>
+        <br>
+        <span class="cuenta-field">Fecha:</span>
+        <span class="cuenta-value">{{ cuenta.fecha | date:'yyyy-MM-dd' }}</span>
+        <br>
+   
+      </div>
+
+      <div class="cuenta-actions">
+        <button class="btn btn-danger" (click)="borrarCuenta(cuenta.id)">Borrar</button>
+        <button class="btn btn-primary" (click)="actualizarCuenta(cuenta.id)">Actualizar</button>
+      </div>
+    </li>
+  </ul>
+</div> -->
+
+<div class="container">
+  <div class="searchCuentas">
+    <input type="text" [(ngModel)]="nombreClienteBusqueda" placeholder="Buscar por nombre de cliente" (input)="filtrarCuentasPorNombre()">
+    <button class="btn btn-primary" (click)="mostrarTodasLasCuentas()">Mostrar todo</button>
+  </div>
+  <h1>Listado de Cuentas</h1>
+  <ul class="cuentas-list">
+    <li *ngFor="let cuenta of cuentas.reverse()" class="cuenta-item">
+      <div class="cuenta-details">
+        <span class="cuenta-field">ID de Cuenta:</span>
+        <span class="cuenta-value">{{ cuenta.id }}</span>
+        <br>
+        <span class="cuenta-field">Nombre del Cliente:</span>
+        <span class="cuenta-value">{{ cuenta.nombre }}</span>
+        <br>
+        <span class="cuenta-field">Monto de la Deuda:</span>
+        <span class="cuenta-value">{{ cuenta.monto }}</span>
+        <br>
+        <span class="cuenta-field">Descripción:</span>
+        <span class="cuenta-value">{{ cuenta.descripcion }}</span>
+        <br>
+        <span class="cuenta-field">Fecha:</span>
+        <span class="cuenta-value">{{ cuenta.fecha | date:'yyyy-MM-dd' }}</span>
+        <br>
+      </div>
+
+      <div class="cuenta-actions">
+        <button class="btn btn-danger" (click)="borrarCuenta(cuenta.id)">Borrar</button>
+        <button class="btn btn-primary" (click)="actualizarCuenta(cuenta.id)">Actualizar</button>
+        <button class="btn btn-secondary" (click)="verDetallesCuenta(cuenta.id)">Ver detalles</button>
+
+      </div>
+    </li>
+  </ul>
+  
+  <!-- Modal -->
+  <div *ngIf="mostrarModal" class="modal">
+    <div class="modal-content">
+      <span class="close" (click)="cerrarDetallesCuenta()">&times;</span>
+      <h2>Detalles de la Cuenta</h2>
+      <div class="box_detail">
+
+        <div class="detail_text">
+  
+          <p><strong>ID:</strong> {{ detalleCuenta?.id }}</p>
+          <p><strong>Nombre del Cliente:</strong> {{ detalleCuenta?.nombre }}</p>
+          <p><strong>Monto de la Deuda:</strong> {{ detalleCuenta?.monto }}</p>
+          <p><strong>Descripción:</strong> {{ detalleCuenta?.descripcion }}</p>
+          <p><strong>Fecha:</strong> {{ detalleCuenta?.fecha | date:'yyyy-MM-dd' }}</p>
+        </div>
+        <!-- Mostrar imagen de la cuenta -->
+        <div class="detail_img">
+          <img [src]="detalleCuenta?.imagen" alt="Imagen de la cuenta" class="cuenta-image">
+        </div>
+      </div>
+      <button class="btn btn-primary" (click)="cerrarDetallesCuenta()">Cerrar Detalles</button>
+    </div>
+  </div>
+
+
+
+</div>

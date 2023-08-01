@@ -1,0 +1,30 @@
+<app-navbar></app-navbar>
+
+<div class="container">
+    <h1>Cuentas de {{  nombre.toUpperCase()  }}</h1>
+    
+
+    <ul class="cuentas-list">
+        <li *ngFor="let cuenta of cuentas" class="cuenta-item">
+          <div class="cuenta-details">
+            <span class="cuenta-field">ID de Cuenta:</span>
+            <span class="cuenta-value">{{ cuenta.id }}</span>
+            <br>
+            <span class="cuenta-field">Monto de la Deuda:</span>
+            <span class="cuenta-value">{{ cuenta.monto }}</span>
+            <br>
+            <span class="cuenta-field">Descripción:</span>
+            <span class="cuenta-value">{{ cuenta.descripcion }}</span>
+            <br>
+            <span class="cuenta-field">Fecha:</span>
+            <span class="cuenta-value">{{ cuenta.fecha | date:'yyyy-MM-dd' }}</span>
+            <br>
+          </div>
+          <div class="cuenta-actions">
+            <button class="btn btn-danger" (click)="borrarCuenta(cuenta.id)">Borrar</button>
+            <button class="btn btn-primary" (click)="actualizarCuenta(cuenta.id)">Actualizar</button>
+          </div>
+        </li>
+      </ul>
+  </div>
+  

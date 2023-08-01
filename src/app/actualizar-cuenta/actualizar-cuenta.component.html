@@ -1,0 +1,38 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <h1 class="title">Actualizar Cuenta</h1>
+  
+    <form [formGroup]="cuentaForm" (ngSubmit)="actualizarCuenta()" class="account-form">
+      <div class="form-group">
+        <label for="idCuenta">Número de Cuenta:</label>
+        <input type="text" id="idCuenta" formControlName="id" readonly class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="nombreCliente">Nombre del Cliente:</label>
+        <input type="text" id="nombreCliente" formControlName="nombre" class="form-control">
+        <div *ngIf="nombre.invalid && nombre.touched" class="error-message">
+          Nombre es requerido
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="monto">Monto de la Deuda:</label>
+        <input type="text" id="monto" formControlName="monto" class="form-control">
+        <div *ngIf="monto.invalid && monto.touched" class="error-message">
+          Monto es requerido y debe ser mayor o igual a 0
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="descripcion">Descripción:</label>
+        <textarea id="descripcion" formControlName="descripcion" rows="4" class="form-control"></textarea>
+        <div *ngIf="descripcion.invalid && descripcion.touched" class="error-message">
+          Descripción es requerida
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="fecha">Fecha:</label>
+        <input type="text" id="fecha" [value]="cuentaForm.get('fecha')?.value | date:'yyyy-MM-dd'" disabled class="form-control">
+      </div>
+      <button type="submit" class="btn btn-primary">Actualizar</button>
+    </form>
+  </div>
+  

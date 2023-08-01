@@ -1,0 +1,52 @@
+<app-navbar></app-navbar>
+
+<div class="containerCrear">
+
+    
+
+      <form [formGroup]="cuentaForm" (ngSubmit)="crearCuenta()" class="modern-form" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="nombre">Nombre:</label>
+          <input type="text" id="nombre" formControlName="nombre" class="form-control">
+          <div *ngIf="nombre?.invalid && nombre?.touched" class="error-message">
+            Nombre es requerido
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="monto">Monto:</label>
+          <input type="text" id="monto" formControlName="monto" class="form-control">
+          <div *ngIf="monto?.invalid && monto?.touched" class="error-message">
+            Monto es requerido y debe ser un número válido
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="descripcion">Descripción:</label>
+          <textarea id="descripcion" formControlName="descripcion" rows="4" class="form-control"></textarea>
+          <div *ngIf="descripcion?.invalid && descripcion?.touched" class="error-message">
+            Descripción es requerida
+          </div>
+        </div>
+      
+        <div class="form-group">
+          <label for="imagen">Imagen:</label>
+          <input type="file" id="imagen" (change)="onFileSelected($event)" class="form-control">
+          <div *ngIf="cuentaForm.get('imagen')?.invalid && cuentaForm.get('imagen')?.touched" class="error-message">
+            Imagen de cuenta
+          </div>
+        </div>
+        <!-- Mostrar la imagen seleccionada si existe la URL -->
+    <div *ngIf="imagenCapturadaURL">
+      <img class="img_prev" [src]="imagenCapturadaURL" alt="Imagen seleccionada">
+    </div>
+      
+    <button type="submit" class="btn btn-primary" [disabled]="loading">
+      <!-- Mostrar el texto "Subiendo imagen..." si loading es true, de lo contrario mostrar "Crear Cuenta" -->
+      {{ loading ? 'Subiendo imagen...' : 'Crear Cuenta' }}
+    </button>
+      </form>
+      
+      
+</div>
+
+
+  

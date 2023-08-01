@@ -1,0 +1,72 @@
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .title {
+    text-align: center;
+  }
+  
+  .account-form {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  textarea.form-control {
+    resize: vertical;
+  }
+  
+  .btn {
+    background-color: #4c6ef5;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .btn-primary:hover {
+    background-color: #4262d6;
+  }
+  
+  .btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(76, 110, 245, 0.5);
+  }
+
+  .error-message{
+    color: red;
+  }
+  
+  @media screen and (max-width: 480px) {
+    .form-group {
+      margin-bottom: 10px;
+    }
+    
+    .btn {
+      margin-top: 10px;
+    }
+  }
+  

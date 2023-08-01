@@ -1,0 +1,31 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <div class="searchClientes">
+      <input type="text" [(ngModel)]="nombreClienteBusqueda" placeholder="Buscar por nombre de cliente" (input)="filtrarClientesPorNombre()">
+      <button class="btn btn-primary" (click)="mostrarTodosLosClientes()">Mostrar todos</button>
+    </div>
+    <h1>Listado de Clientes</h1>
+    <ul class="clientes-list">
+      <li *ngFor="let cliente of clientes" class="cliente-item">
+        <div class="cliente-details">
+          <div class="cliente-field">
+            <strong>ID de Cliente:</strong>
+            <span>{{ cliente.id }}</span>
+          </div>
+          <div class="cliente-field">
+            <strong>Nombre:</strong>
+            <span>{{ cliente.nombre }}</span>
+          </div>
+          <div class="cliente-field">
+            <strong>Total de Deuda:</strong>
+            <span>{{ obtenerSumaMontos(cliente.Cuenta) }}</span>
+          </div>
+        </div>
+        <div class="cliente-actions">
+          <a [routerLink]="['/cuentas', cliente.id, cliente.nombre]" class="ver-cuentas-link">Ver Cuentas</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+  
+  
