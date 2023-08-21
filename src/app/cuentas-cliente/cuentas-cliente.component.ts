@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import axios from 'axios';
 import { Router } from '@angular/router';
-
+import { environment } from 'src/enviroments/enviroments';
 @Component({
   selector: 'app-cuentas-cliente',
   templateUrl: './cuentas-cliente.component.html',
@@ -12,6 +12,9 @@ export class CuentasClienteComponent  implements OnInit {
     clienteId!: number;
     nombre! :string;
     cuentas: any[] = [];
+    detalleCuenta: any | null = null; // Variable para almacenar los detalles de una cuenta
+    mostrarModal= false;
+    apiUrl: string = environment.apiUrl;
   
     constructor(private route: ActivatedRoute,private router: Router) { }
   
@@ -23,7 +26,7 @@ export class CuentasClienteComponent  implements OnInit {
      this.nombre = nombreClienteParam?nombreClienteParam:'';
 
       // Realizar la petición Axios para obtener las cuentas del cliente
-      axios.get(`http://localhost:3001/clientes/${this.clienteId}`)
+      axios.get(`${this.apiUrl}/clientes/${this.clienteId}`)
         .then(response => {
           this.cuentas = response.data;
         })
@@ -34,7 +37,7 @@ export class CuentasClienteComponent  implements OnInit {
 
     obtenerCuentas() {
       axios
-        .get(`http://localhost:3001/clientes/${this.clienteId}`)
+        .get(`${this.apiUrl}/clientes/${this.clienteId}`)
         .then((response) => {
           this.cuentas = response.data;
         })
@@ -44,7 +47,7 @@ export class CuentasClienteComponent  implements OnInit {
     }
 
     borrarCuenta(id: number) {
-      axios.patch(`http://localhost:3001/cuentadelete/${id}`, { activo: false })
+      axios.patch(`${this.apiUrl}/cuentadelete/${id}`, { activo: false })
         .then(response => {
           console.log('Cuenta desactivada correctamente');
         this.obtenerCuentas();
@@ -76,6 +79,32 @@ export class CuentasClienteComponent  implements OnInit {
       //     console.error('Error al actualizar la cuenta:', error);
       //   });
     }
+
+     // Método para abrir el modal con los detalles de la cuenta
+  verDetallesCuenta(idCuenta: any) {
+    console.log(idCuenta)
+  //  this.mostrarModal = true; // Mostrar el modal
+    // Realizar una solicitud a la API para obtener los detalles de la cuenta
+    axios.get(`${this.apiUrl}/cuenta/${idCuenta}`)
+      .then(response => {
+        this.detalleCuenta = response.data;
+        this.mostrarModal = true;
+        console.log(response.data)
+        
+      })
+      .catch(error => {
+        console.error('Error al obtener los detalles de la cuenta:', error);
+      });
+
+   
+  }
+
+  cerrarDetallesCuenta() {
+    // Ocultar el modal
+    this.mostrarModal = false;
+    this.detalleCuenta = null;
+    
+  }
   
   
 }

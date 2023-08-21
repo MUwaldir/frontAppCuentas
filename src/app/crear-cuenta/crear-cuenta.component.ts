@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import axios from 'axios';
 import { Router } from '@angular/router';
+import { environment } from 'src/enviroments/enviroments';
 
 @Component({
   selector: 'app-crear-cuenta',
@@ -13,13 +14,14 @@ export class CrearCuentaComponent implements OnInit {
   imagenCapturada: File | null = null; // Variable para almacenar la imagen seleccionada como archivo
   imagenCapturadaURL: any; // Variable para almacenar la URL de la imagen seleccionada
   loading: boolean = false; // Variable para indicar si se está cargando la imagen
+  apiUrl:string = environment.apiUrl
 
   constructor(private formBuilder: FormBuilder, private router: Router) {
     this.cuentaForm = this.formBuilder.group({
       nombre: ['', Validators.required],
       monto: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
       descripcion: ['', Validators.required],
-      imagen: [null]
+      imagen: null
     });
   }
 
@@ -75,23 +77,20 @@ export class CrearCuentaComponent implements OnInit {
     }
 
     // Obtener solo el nombre de la imagen, sin enviar el archivo completo al backend
-    const nombreImagen = this.imagenCapturada ? this.imagenCapturada.name : null;
-
+    // const nombreImagen = this.imagenCapturada ? this.imagenCapturada.name : null;
+    const urlImagen = this.imagenCapturadaURL ? this.imagenCapturadaURL : 'noimagen';
     // Construir el objeto de datos que se enviará al backend
     const datosCuenta = {
       nombre: this.cuentaForm.get('nombre')?.value,
       monto: this.cuentaForm.get('monto')?.value,
       descripcion: this.cuentaForm.get('descripcion')?.value,
-      imagen: nombreImagen
+      imagen: urlImagen
     };
 
-    // Iniciar la carga de la imagen a Cloudinary
-    this.loading = true;
-    this.subirImagenACloudinary().then((url) => {
-      datosCuenta.imagen = url; // Reemplazar con la URL de la imagen en Cloudinary
-
+  
+   
       // Realizar la solicitud al backend (ajusta la URL del endpoint según tu configuración)
-      axios.post('http://localhost:3001/cuentas', datosCuenta)
+      axios.post(`${this.apiUrl}/cuentas`, datosCuenta)
         .then(response => {
           console.log('Cuenta creada:', response.data);
           this.router.navigate(['/home']);
@@ -102,7 +101,7 @@ export class CrearCuentaComponent implements OnInit {
         .finally(() => {
           this.loading = false; // Restablecer el estado del botón "Crear Cuenta" después de enviar la solicitud
         });
-    });
+    
   }
 
 

@@ -55,6 +55,9 @@
   .btn-danger {
     background-color: #dc3545;
   }
+  .btn-success {
+    background-color: #0fe857;
+  }
   .searchCuentas{
     display: flex;
     justify-content: space-between;
@@ -118,7 +121,7 @@
 
 .modal-content .cuenta-image {
   max-width: 100%;
-  max-height:50vh ;
+  height:300px;
   margin: 10px 0;
   object-fit: contain;
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import axios from 'axios';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { environment } from 'src/enviroments/enviroments';
 
 @Component({
   selector: 'app-actualizar-cuenta',
@@ -15,6 +16,7 @@ export class ActualizarCuentaComponent implements OnInit {
   nombre!: AbstractControl;
   monto!: AbstractControl;
   descripcion!: AbstractControl;
+  apiUrl:string = environment.apiUrl
 
   constructor(
     private route: ActivatedRoute,
@@ -45,7 +47,7 @@ export class ActualizarCuentaComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.id = params['id'];
       axios
-        .get(`http://localhost:3001/cuenta/${this.id}`)
+        .get(`${this.apiUrl}/cuenta/${this.id}`)
         .then((response) => {
           this.cuentaForm.patchValue(response.data);
           console.log(response.data);
@@ -67,7 +69,7 @@ export class ActualizarCuentaComponent implements OnInit {
     console.log(cuerpoDatos);
 
     axios
-      .patch(`http://localhost:3001/cuentas/${idCuenta}`, cuerpoDatos)
+      .patch(`${this.apiUrl}/cuentas/${idCuenta}`, cuerpoDatos)
       .then((response) => {
         console.log('Cuenta actualizada:', response.data);
         this.router.navigate(['/home']);

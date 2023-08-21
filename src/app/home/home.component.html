@@ -41,7 +41,10 @@
     <button class="btn btn-primary" (click)="mostrarTodasLasCuentas()">Mostrar todo</button>
   </div>
   <h1>Listado de Cuentas</h1>
-  <ul class="cuentas-list">
+  <div *ngIf="cuentas && cuentas.length === 0" class="no-cuentas-message">
+    No hay cuentas disponibles.
+  </div>
+  <ul class="cuentas-list" *ngIf="cuentas && cuentas.length > 0">
     <li *ngFor="let cuenta of cuentas.reverse()" class="cuenta-item">
       <div class="cuenta-details">
         <span class="cuenta-field">ID de Cuenta:</span>
@@ -51,7 +54,7 @@
         <span class="cuenta-value">{{ cuenta.nombre }}</span>
         <br>
         <span class="cuenta-field">Monto de la Deuda:</span>
-        <span class="cuenta-value">{{ cuenta.monto }}</span>
+        <span class="cuenta-value">{{ cuenta.monto }} soles</span>
         <br>
         <span class="cuenta-field">Descripción:</span>
         <span class="cuenta-value">{{ cuenta.descripcion }}</span>
@@ -64,7 +67,7 @@
       <div class="cuenta-actions">
         <button class="btn btn-danger" (click)="borrarCuenta(cuenta.id)">Borrar</button>
         <button class="btn btn-primary" (click)="actualizarCuenta(cuenta.id)">Actualizar</button>
-        <button class="btn btn-secondary" (click)="verDetallesCuenta(cuenta.id)">Ver detalles</button>
+        <button class="btn btn-success" (click)="verDetallesCuenta(cuenta.id)">Ver detalles</button>
 
       </div>
     </li>
@@ -81,7 +84,7 @@
   
           <p><strong>ID:</strong> {{ detalleCuenta?.id }}</p>
           <p><strong>Nombre del Cliente:</strong> {{ detalleCuenta?.nombre }}</p>
-          <p><strong>Monto de la Deuda:</strong> {{ detalleCuenta?.monto }}</p>
+          <p><strong>Monto de la Deuda:</strong> {{ detalleCuenta?.monto }} soles</p>
           <p><strong>Descripción:</strong> {{ detalleCuenta?.descripcion }}</p>
           <p><strong>Fecha:</strong> {{ detalleCuenta?.fecha | date:'yyyy-MM-dd' }}</p>
         </div>

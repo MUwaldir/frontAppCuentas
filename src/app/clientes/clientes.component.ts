@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import axios from 'axios';
+import { environment } from 'src/enviroments/enviroments';
+
 @Component({
   selector: 'app-clientes',
   templateUrl: './clientes.component.html',
@@ -8,6 +10,7 @@ import axios from 'axios';
 export class ClientesComponent implements OnInit {
   clientes: any[] = [];
   nombreClienteBusqueda: string = '';
+  apiUrl:string = environment.apiUrl
   
 
   ngOnInit() {
@@ -16,7 +19,7 @@ export class ClientesComponent implements OnInit {
 
   obtenerClientes() {
     axios
-      .get('http://localhost:3001/clientes')
+      .get(`${this.apiUrl}/clientes`)
       .then(response => {
         this.clientes = response.data;
         console.log(response.data);

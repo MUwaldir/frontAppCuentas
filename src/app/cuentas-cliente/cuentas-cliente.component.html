@@ -23,8 +23,34 @@
           <div class="cuenta-actions">
             <button class="btn btn-danger" (click)="borrarCuenta(cuenta.id)">Borrar</button>
             <button class="btn btn-primary" (click)="actualizarCuenta(cuenta.id)">Actualizar</button>
+            <button class="btn btn-success" (click)="verDetallesCuenta(cuenta.id)">Ver detalles</button>
+
           </div>
         </li>
       </ul>
+
+        <!-- Modal -->
+  <div *ngIf="mostrarModal" class="modal">
+    <div class="modal-content">
+      <span class="close" (click)="cerrarDetallesCuenta()">&times;</span>
+      <h2>Detalles de la Cuenta</h2>
+      <div class="box_detail">
+
+        <div class="detail_text">
+  
+          <p><strong>ID:</strong> {{ detalleCuenta?.id }}</p>
+          <p><strong>Nombre del Cliente:</strong> {{ detalleCuenta?.nombre }}</p>
+          <p><strong>Monto de la Deuda:</strong> {{ detalleCuenta?.monto }} soles</p>
+          <p><strong>Descripción:</strong> {{ detalleCuenta?.descripcion }}</p>
+          <p><strong>Fecha:</strong> {{ detalleCuenta?.fecha | date:'yyyy-MM-dd' }}</p>
+        </div>
+        <!-- Mostrar imagen de la cuenta -->
+        <div class="detail_img">
+          <img [src]="detalleCuenta?.imagen" alt="Imagen de la cuenta" class="cuenta-image">
+        </div>
+      </div>
+      <button class="btn btn-primary" (click)="cerrarDetallesCuenta()">Cerrar Detalles</button>
+    </div>
+  </div>
   </div>
   

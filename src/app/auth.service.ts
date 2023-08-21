@@ -1,35 +1,54 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import axios from 'axios';
+import { environment } from 'src/enviroments/enviroments';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private isLoggedIn = false;
-
+  
+apiUrl: string = environment.apiUrl
   constructor() { }
 
-  login(username: string, password: string): boolean {
-    // Aquí implementa la lógica para verificar las credenciales de inicio de sesión
-    // Puedes comparar las credenciales con una base de datos o utilizar otro método de autenticación
-
-    if (username === 'admin' && password === '12345') {
-      // Credenciales válidas, establece el estado de inicio de sesión como verdadero
-      this.isLoggedIn = true;
+  async login(username: string, password: string): Promise<boolean> {
+    
+    try {
+      // Hacer la solicitud de inicio de sesión utilizando Axios
+      const response = await axios.post<any>(`${this.apiUrl}/login`, {
+        nombre: username,
+        contrasena: password
+      });
+    console.log(response.data.token)
+      // Almacenar el token en el Local Storage
+      const token = response.data.token;
+      localStorage.setItem('token', token);
+  
+      // Establecer el estado de inicio de sesión como verdadero
+    
       return true;
+    } catch (error) {
+      console.error('Error al iniciar sesión:', error);
+      // Establecer el estado de inicio de sesión como falso en caso de error
+    
+      return false;
     }
-
-    // Credenciales inválidas, establece el estado de inicio de sesión como falso
-    this.isLoggedIn = false;
-    return false;
   }
 
   logout(): void {
-    // Cierra la sesión del usuario estableciendo el estado de inicio de sesión como falso
-    this.isLoggedIn = false;
+    // Eliminar el token del Local Storage al cerrar sesión
+    localStorage.removeItem('token');
+    // Establecer el estado de inicio de sesión como falso
+ 
   }
 
   get loggedIn(): boolean {
+    // Verificar si el token está presente en el Local Storage
+    const token = localStorage.getItem('token');
     // Devuelve el estado de inicio de sesión actual
-    return this.isLoggedIn;
+    return  token !== null;
   }
+
+
+
 }

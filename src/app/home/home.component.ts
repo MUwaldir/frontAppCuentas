@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import axios from 'axios';
 import { Router } from '@angular/router';
-
+import { environment } from 'src/enviroments/enviroments';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   detalleCuenta: any | null = null; // Variable para almacenar los detalles de una cuenta
   nombreClienteBusqueda: string = '';
   mostrarModal = false; // Variable para controlar la visualización del modal
- 
+  apiUrl:string = environment.apiUrl;
  
   constructor(private router: Router) {}
 
@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
   }
 
   obtenerCuentas() {
-    axios.get('http://localhost:3001/cuentas')
+    axios.get(`${this.apiUrl}/cuentas`)
       .then(response => {
         this.cuentas = response.data;
       
@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
   }
 
   borrarCuenta(id: number) {
-    axios.patch(`http://localhost:3001/cuentadelete/${id}`, { activo: false })
+    axios.patch(`${this.apiUrl}/cuentadelete/${id}`, { activo: false })
       .then(response => {
         console.log('Cuenta desactivada correctamente');
         this.obtenerCuentas(); // Actualizar la lista de cuentas después de desactivar
@@ -49,7 +49,7 @@ export class HomeComponent implements OnInit {
     console.log(idCuenta)
   //  this.mostrarModal = true; // Mostrar el modal
     // Realizar una solicitud a la API para obtener los detalles de la cuenta
-    axios.get(`http://localhost:3001/cuenta/${idCuenta}`)
+    axios.get(`${this.apiUrl}/cuenta/${idCuenta}`)
       .then(response => {
         this.detalleCuenta = response.data;
         this.mostrarModal = true;
