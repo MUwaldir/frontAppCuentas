@@ -7,7 +7,6 @@
     
 }
   .landing-page {
-    /* background-image: url('https://elmen.pe/wp-content/uploads/2023/02/bodega-de-abarrotes.jpg'); */
     background-color: #087cf8;
     background-repeat: no-repeat;
     background-size: cover;
@@ -71,10 +70,7 @@
 
 
 /* Estilos específicos para el ícono */
-/* .password-toggle-btn i {
-  font-size: 16px;
-  vertical-align: middle;
-} */
+
 
 /* Estilos para el contenedor del campo de contraseña y el botón */
 .password-input {
@@ -95,7 +91,3 @@ margin-left: 88%;
   padding: 0 5px;
   bottom: 12px;
 }
-/* .password-toggle-btn i {
-  display: flex;
-  align-items:end;
-} */
